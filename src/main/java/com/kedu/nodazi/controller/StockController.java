@@ -1,5 +1,7 @@
 package com.kedu.nodazi.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -8,17 +10,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kedu.nodazi.dto.RecStockDto;
+import com.kedu.nodazi.service.RecStockService;
+
 @Controller
 @RequestMapping("/stock")
 public class StockController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(StockController.class);
 	
+	@Inject
+	private RecStockService service;
+	
 	@RequestMapping(value = "/recommend", method = RequestMethod.GET)
 	public void recommend() throws Exception{
 		
-		logger.info("/stock/recommend.GET.......................................");
+		List<RecStockDto> recStockList = null;
+		recStockList = service.readRecStock();
 		
+		logger.info("/stock/recommend.GET.......................................");
+		logger.info("recStockList : " + recStockList);
 	}
 	
 }

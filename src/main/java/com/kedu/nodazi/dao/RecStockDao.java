@@ -1,6 +1,6 @@
 package com.kedu.nodazi.dao;
 
-import java.util.Date;
+import java.util.List;
 
 import com.kedu.nodazi.dto.RecStockDto;
 
@@ -25,6 +25,6 @@ public interface RecStockDao {
 	 * @return		  RecStockDto
 	 * @throws		  Exception
 	 *****************************************************/
-	public RecStockDto readRecStock(Date today) throws Exception;
-	
+	public List<RecStockDto> readRecStock() throws Exception;
+
 }

@@ -1,7 +1,5 @@
 package com.kedu.nodazi.dto;
 
-import java.util.Date;
-
 /*****************************************************
  * <pre>
  * com.kedu.nodazi.dto
@@ -13,29 +11,29 @@ import java.util.Date;
  *****************************************************/
 public class RecStockDto {
 	
-	private String	r_regdt;
-	private String	r_recdt;
-	private int		r_seq;
+	private Integer	r_regdt;
+	private Integer	r_recdt;
+	private Integer	r_seq;
 	private String	code;
 	private	float	r_change;
 	
 	
-	public String getR_regdt() {
+	public Integer getR_regdt() {
 		return r_regdt;
 	}
-	public void setR_regdt(String r_regdt) {
+	public void setR_regdt(Integer r_regdt) {
 		this.r_regdt = r_regdt;
 	}
-	public String getR_recdt() {
+	public Integer getR_recdt() {
 		return r_recdt;
 	}
-	public void setR_recdt(String r_recdt) {
+	public void setR_recdt(Integer r_recdt) {
 		this.r_recdt = r_recdt;
 	}
-	public int getR_seq() {
+	public Integer getR_seq() {
 		return r_seq;
 	}
-	public void setR_seq(int r_seq) {
+	public void setR_seq(Integer r_seq) {
 		this.r_seq = r_seq;
 	}
 	public String getCode() {
@@ -50,13 +48,12 @@ public class RecStockDto {
 	public void setR_change(float r_change) {
 		this.r_change = r_change;
 	}
-
+	
 	
 	@Override
 	public String toString() {
 		return "RecStockDto [r_regdt=" + r_regdt + ", r_recdt=" + r_recdt + ", r_seq=" + r_seq + ", code=" + code
 				+ ", r_change=" + r_change + "]";
 	}
-	
-	
+		
 }

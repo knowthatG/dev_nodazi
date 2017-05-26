@@ -13,22 +13,23 @@ import java.util.Date;
  *****************************************************/
 public class RecStockDto {
 	
-	private Date	r_regdt;
-	private Date	r_recdt;
+	private String	r_regdt;
+	private String	r_recdt;
 	private int		r_seq;
 	private String	code;
 	private	float	r_change;
 	
-	public Date getR_regdt() {
+	
+	public String getR_regdt() {
 		return r_regdt;
 	}
-	public void setR_regdt(Date r_regdt) {
+	public void setR_regdt(String r_regdt) {
 		this.r_regdt = r_regdt;
 	}
-	public Date getR_recdt() {
+	public String getR_recdt() {
 		return r_recdt;
 	}
-	public void setR_recdt(Date r_recdt) {
+	public void setR_recdt(String r_recdt) {
 		this.r_recdt = r_recdt;
 	}
 	public int getR_seq() {
@@ -50,10 +51,12 @@ public class RecStockDto {
 		this.r_change = r_change;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "RecStockDto [r_regdt=" + r_regdt + ", r_recdt=" + r_recdt + ", r_seq=" + r_seq + ", code=" + code
 				+ ", r_change=" + r_change + "]";
 	}
+	
 	
 }

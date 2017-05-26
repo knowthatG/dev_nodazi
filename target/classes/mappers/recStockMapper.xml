@@ -5,11 +5,12 @@
 
 <mapper namespace="com.kedu.nodazi.mapper.RecStockMapper">
 
-	<select id="readRecStock" resultType="RecStockDto">
+	<select id="readRecStock"
+			resultType="com.kedu.nodazi.dto.RecStockDto">
 		select code
-		from rec_stock
-		where r_recdt = #{today}
-		order by r_seq
+		  from rec_stock
+		 where r_recdt = #{today}
+		 order by r_seq
 	</select>
 
 </mapper>

@@ -30,6 +30,8 @@ public class StockController {
 		Map<Integer, HashMap<Integer, RecStockDto>> recStockList = new HashMap<Integer, HashMap<Integer, RecStockDto>>();
 		recStockList = service.readRecStock();
 		
+		logger.info("제발 됬으면 조켔다");
+		
 		logger.info("/stock/recommend.GET.......................................");
 		logger.info("recStockList : " + recStockList);
 	}

@@ -1,6 +1,7 @@
 package com.kedu.nodazi.dao;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.kedu.nodazi.dto.RecStockDto;
 
@@ -22,9 +23,9 @@ public interface RecStockDao {
 	 * </pre>
 	 * @Method Name : readRecStock
 	 * @param		  today
-	 * @return		  RecStockDto
+	 * @return		  Map<Integer, HashMap<Integer, RecStockDto>>
 	 * @throws		  Exception
 	 *****************************************************/
-	public List<RecStockDto> readRecStock() throws Exception;
+	public Map<Integer, HashMap<Integer, RecStockDto>> readRecStock() throws Exception;
 
 }

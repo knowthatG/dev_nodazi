@@ -1,6 +1,8 @@
 package com.kedu.nodazi.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -25,7 +27,7 @@ public class StockController {
 	@RequestMapping(value = "/recommend", method = RequestMethod.GET)
 	public void recommend() throws Exception{
 		
-		List<RecStockDto> recStockList = null;
+		Map<Integer, HashMap<Integer, RecStockDto>> recStockList = new HashMap<Integer, HashMap<Integer, RecStockDto>>();
 		recStockList = service.readRecStock();
 		
 		logger.info("/stock/recommend.GET.......................................");

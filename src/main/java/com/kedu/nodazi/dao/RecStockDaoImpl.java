@@ -1,6 +1,5 @@
 package com.kedu.nodazi.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -14,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.kedu.nodazi.dto.RecStockDto;
+import com.kedu.nodazi.dto.PricesDto;
 
 @Repository
 public class RecStockDaoImpl implements RecStockDao{
@@ -26,38 +25,29 @@ public class RecStockDaoImpl implements RecStockDao{
 	
 	private static String namespace = "com.kedu.nodazi.mapper.RecStockMapper";
 	
+
 	@Override
-	public Map<Integer, HashMap<Integer, RecStockDto>> readRecStock() throws Exception {
+	public List<String> readRecStock() throws Exception {
 		
-		String today = "";
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		
-		List<String> recList = new ArrayList<String>();
-		RecStockDto rsDto;
-		
-		Map<Integer, HashMap<Integer, RecStockDto>> recStock = new HashMap<Integer, HashMap<Integer, RecStockDto>>();
-		
-//		Map<Integer, RecStockDto> recStock1 = new HashMap<Integer, RecStockDto>();
-//		Map<Integer, RecStockDto> recStock2 = new HashMap<Integer, RecStockDto>();
-//		Map<Integer, RecStockDto> recStock3 = new HashMap<Integer, RecStockDto>();
-//		Map<Integer, RecStockDto> recStock4 = new HashMap<Integer, RecStockDto>();
-//		Map<Integer, RecStockDto> recStock5 = new HashMap<Integer, RecStockDto>();
+		Calendar day   = Calendar.getInstance();
+		String	 today = "";
 		
 		Map<String, Integer> listMap  = new HashMap<String, Integer>();
-//		Map<String, String>  stockMap = new HashMap<String, String>();
-		
-		
-//		지금은 오늘의 값이 없음, 오늘 값으로 select가 잘되는 것을 확인
+		List<String>		 recList  = new ArrayList<String>();
 		
 //		오늘 날짜 생성
-		Calendar day = Calendar.getInstance();
-		
 		int year = day.get(Calendar.YEAR);
 		int month = day.get(Calendar.MONTH) + 1;
 		int date = day.get(Calendar.DATE);
 		
-		day.set(year, month, date);
-		today = sdf.format(day);
+		today += year;
+		if(month < 10){
+			today += 0;
+			today += month;
+		}else{
+			today += month;
+		}
+		today += date;
 		
 		logger.info("today : " + today);
 		
@@ -73,28 +63,20 @@ public class RecStockDaoImpl implements RecStockDao{
 		
 		logger.info("recList : " + recList);
 		
-//		종목코드로 일주일치 주가데이터를 가져온다.
-//		list는 index임으로 0부터 시작
-		for(int seq=1; seq<=5; seq++){
+		return recList;
+	}
 
-//			stockMap.put("code", recList.get(seq));
-//			stockMap.put("week", "");
-			
-			String code = recList.get(seq-1);
-			
-			recStock.put(seq, new HashMap<Integer, RecStockDto>());
-			HashMap<Integer, RecStockDto> price = recStock.get(seq);
-//			price.put(week, (RecStockDto)session.selectOne(namespace + ".readRecStock", code));
-			
-			for(int week=1; week<=7; week++){
-			}
-			
-		}
+	@Override
+	public List<PricesDto> readStockPrice(String code, int term) throws Exception {
 		
+//		code는 String으로 받아야 하지만 term이 int여야 함으로 sql문에서 cast(#{code} as char)를 해준다.
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("code", Integer.parseInt(code, 10));
+		map.put("term", term);
 		
+		logger.info("code : " + Integer.parseInt(code, 10));
 		
-		
-		return recStock;
+		return session.selectList(namespace + ".readRecStock", map);
 	}
 
 }

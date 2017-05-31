@@ -1,9 +1,8 @@
 package com.kedu.nodazi.dao;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import com.kedu.nodazi.dto.RecStockDto;
+import com.kedu.nodazi.dto.PricesDto;
 
 /*****************************************************
  * <pre>
@@ -22,10 +21,22 @@ public interface RecStockDao {
 	 * 2. 처리내용	: rec_stock 디비에서 오늘 날짜로 추천될 종목을 조회
 	 * </pre>
 	 * @Method Name : readRecStock
-	 * @param		  today
-	 * @return		  Map<Integer, HashMap<Integer, RecStockDto>>
+	 * @return		  List<String>
 	 * @throws		  Exception
 	 *****************************************************/
-	public Map<Integer, HashMap<Integer, RecStockDto>> readRecStock() throws Exception;
+	public List<String> readRecStock() throws Exception;
+	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 종목의 주가정보를 조회
+	 * 2. 처리내용	: 종목코드와 조회할 기간을 받아서 주가데이터를 조회
+	 * </pre>
+	 * @Method Name : readStockPrice
+	 * @param		  code
+	 * @param		  term
+	 * @return		  List<PricesDto>
+	 * @throws		  Exception
+	 *****************************************************/
+	public List<PricesDto> readStockPrice(String code, int term) throws Exception;
 
 }

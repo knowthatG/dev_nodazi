@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,12 +41,14 @@
 		'packages' : [ 'corechart' ]
 	});
 	google.charts.setOnLoadCallback(drawChart);
-
+	
 	function drawChart() {
 		var data = google.visualization.arrayToDataTable([
-				[ 'Mon', 20, 28, 38, 45 ], [ 'Tue', 31, 38, 55, 66 ],
-				[ 'Wed', 50, 55, 77, 80 ], [ 'Thu', 77, 77, 66, 50 ],
-				[ 'Fri', 68, 66, 22, 15 ]
+				  [ 'Mon', 20, 28, 38, 45 ]
+				, [ 'Tue', 31, 38, 55, 66 ]
+				, [ 'Wed', 50, 55, 77, 80 ]
+				, [ 'Thu', 77, 77, 66, 50 ]
+				, [ 'Fri', 68, 66, 22, 15 ]
 		// Treat first row as data as well.
 		], true);
 
@@ -63,6 +66,7 @@
 </head>
 
 <body>
+
 
 	<div id="wrapper">
 

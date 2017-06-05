@@ -14,11 +14,12 @@
 	</select>
 	
 	<select id="readRecStock"
-			resultType="com.kedu.nodazi.dto.RecStockDto">
+			resultType="com.kedu.nodazi.dto.PricesDto">
 		select *
 		  from prices
-		 where code = #{code}
-		 limit 5
+		 where code = lpad(cast(#{code} as char), 6, '0')
+		 order by price_date desc
+		 limit #{term}
 	</select>
 
 </mapper>

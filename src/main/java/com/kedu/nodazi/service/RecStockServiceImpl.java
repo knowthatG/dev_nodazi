@@ -1,6 +1,5 @@
 package com.kedu.nodazi.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kedu.nodazi.dao.RecStockDao;
-import com.kedu.nodazi.dto.RecStockDto;
+import com.kedu.nodazi.dto.PricesDto;
 
 @Service
 public class RecStockServiceImpl implements RecStockService{
@@ -18,9 +17,16 @@ public class RecStockServiceImpl implements RecStockService{
 	private RecStockDao dao;
 
 	@Override
-	public Map<Integer, HashMap<Integer, RecStockDto>> readRecStock() throws Exception {
+	public List<String> readRecStock() throws Exception {
 		
 		return dao.readRecStock();
 	}
+
+	@Override
+	public List<PricesDto> readStockPrice(String code, int term) throws Exception {
+		
+		return dao.readStockPrice(code, term);
+	}
+
 	
 }

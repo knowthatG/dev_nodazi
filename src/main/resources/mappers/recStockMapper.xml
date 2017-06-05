@@ -15,7 +15,11 @@
 	
 	<select id="readRecStock"
 			resultType="com.kedu.nodazi.dto.PricesDto">
-		select *
+		select price_date
+			 , price_open
+			 , price_close
+			 , price_high
+			 , price_low
 		  from prices
 		 where code = lpad(cast(#{code} as char), 6, '0')
 		 order by price_date desc

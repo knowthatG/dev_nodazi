@@ -43,13 +43,14 @@ public class RecStockDaoImpl implements RecStockDao{
 		today += year;
 		if(month < 10){
 			today += 0;
-			today += month;
-		}else{
-			today += month;
+		}
+		today += month;
+		if(date < 10){
+			today += 0;
 		}
 		today += date;
 		
-		logger.info("today : " + today);
+//		logger.info("today : " + today);
 		
 //		오늘의 추천종목 5개의 종목코드를 가져온다.
 		listMap.put("today", Integer.parseInt(today));
@@ -61,7 +62,7 @@ public class RecStockDaoImpl implements RecStockDao{
 			recList.add(session.selectOne(namespace+".readRecList", listMap).toString());
 		}
 		
-		logger.info("recList : " + recList);
+//		logger.info("recList : " + recList);
 		
 		return recList;
 	}
@@ -74,9 +75,39 @@ public class RecStockDaoImpl implements RecStockDao{
 		map.put("code", Integer.parseInt(code, 10));
 		map.put("term", term);
 		
-		logger.info("code : " + Integer.parseInt(code, 10));
-		
 		return session.selectList(namespace + ".readRecStock", map);
+		
+//		List<Object>	stock  = new ArrayList<Object>();
+//		String[] stockDate = new String[term];
+//		int[] stockPrices = new int[term];
+//		 
+//		List<PricesDto> prices  = session.selectList(namespace + ".readRecStock", map);
+//		
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+//		
+//		for(int num = 0; num < prices.size(); num++){
+//			PricesDto dto = prices.get(num);
+//
+//			Object[] price = new Object[5];
+//			List<Object> price = new ArrayList<Object>();
+//			price[0] = sdf.format(dto.getPrice_date());
+//			price[1] = dto.getPrice_low();
+//			price[2] = dto.getPrice_open();
+//			price[3] = dto.getPrice_close();
+//			price[4] = dto.getPrice_high();
+//			
+//			price.add(sdf.format(dto.getPrice_date()));
+//			price.add(dto.getPrice_low());
+//			price.add(dto.getPrice_open());
+//			price.add(dto.getPrice_close());
+//			price.add(dto.getPrice_high());
+//			
+//			Object[] priceArray = price.toArray(new Object[price.size()]);
+//
+//			stock[num] = price;
+//			stock[num] = price;
+//		}
+		
 	}
 
 }

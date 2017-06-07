@@ -27,7 +27,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "bootstrap/index";
+		return "manager/userManagement";
 	}
 	
 }

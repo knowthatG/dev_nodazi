@@ -20,5 +20,5 @@ public interface ReplyDao {
 	
 	public void update(ReplyDto rDto) throws Exception;
 	
-	public void delete(int b_no) throws Exception;
+	public void delete(int r_no) throws Exception;
 }

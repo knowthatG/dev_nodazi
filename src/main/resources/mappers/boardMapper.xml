@@ -15,7 +15,7 @@
 	</insert>
 	
 	<select id="read"
-			resultType="BoardDto">
+			resultType="com.kedu.nodazi.dto.BoardDto">
 		select b_no
 			 , b_title
 			 , b_content
@@ -42,7 +42,7 @@
 	</delete>
 	
 	<select id="listAll"
-			resultType="BoardDto">
+			resultType="com.kedu.nodazi.dto.BoardDto">
 		<![CDATA[
 		select b_no
 			 , b_title
@@ -58,7 +58,7 @@
 	</select>
 	
 	<select id="listCriteria"
-			resultType="BoardDto">
+			resultType="com.kedu.nodazi.dto.BoardDto">
 		<![CDATA[
 		select b_no
 			 , b_title
@@ -84,7 +84,7 @@
 	</select>
 	
 	<select id="listSearch"
-			reusltType="BoardDto">
+			resultType="com.kedu.nodazi.dto.BoardDto">
 		<![CDATA[
 		select *
 		  from board

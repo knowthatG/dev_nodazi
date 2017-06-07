@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+
 import com.kedu.nodazi.dao.ReplyDao;
 import com.kedu.nodazi.dto.ReplyDto;
 
+@Service
 public class ReplyServiceImpl implements ReplyService {
 
 	@Inject

@@ -6,7 +6,7 @@
 <mapper namespace="com.kedu.nodazi.mapper.ReplyMapper">
 
 	<select id="list"
-			resultType="ReplyDto">
+			resultType="com.kedu.nodazi.dto.ReplyDto">
 		select *
 		  from reply
 		 where b_no = #{b_no}

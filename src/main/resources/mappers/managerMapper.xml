@@ -17,7 +17,7 @@
   		  from user as u inner join payment as p
  		 where u.u_id = p.u_id
 		<include refid="search"></include>
- 		 order by reg_dt desc
+ 		 order by p.p_regdt desc
  		 limit #{pageStart}, #{perPageNum}
 	</select>
 	
@@ -44,7 +44,7 @@
 			<if test="searchType == 'inb'.toString()">
 				and ( p.u_id like CONCAT('%', #{keyword}, '%')
 				OR
-				p.p_dep_bank like CONCAT('%', #{keyword}, '%')
+				p.p_dep_nm like CONCAT('%', #{keyword}, '%')
 				OR
 				p.p_dep_bank like CONCAT('%', #{keyword}, '%'))
 			</if>

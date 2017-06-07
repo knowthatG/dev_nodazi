@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.Date" %>
 <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin - Bootstrap Admin Template</title>
+<title>주가 예측 프로젝트 - 노다지</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -68,28 +69,53 @@
 				<!-- /.row -->
 
 				<div class="col-lg-12">
-					<div class="panel panel-default">
 						
 						<div class="box">
-							<div class="box-header with-border">
-								
+							<div class="box-header form-inline">
+								<select name="searchType" class="form-control">
+									<option value="ind" selected="selected"
+										<c:out value="${cri.searchType eq ''?'selected':''}"/>>
+										전체
+									</option>
+									<option value="i"
+										<c:out value="${cri.searchType eq 'i'?'selected':''}"/>>
+										아이디
+									</option>
+									<option value="n"
+										<c:out value="${cri.searchType eq 'n'?'selected':''}"/>>
+										입금주
+									</option>
+									<option value="b"
+										<c:out value="${cri.searchType eq 'b'?'selected':''}"/>>
+										입금은행
+									</option>
+								</select> <input type="text" name='keyword' id="keywordInput" class="form-control"
+									value='${cri.keyword }'>
+								<button id="searchBtn" class="btn btn-default">Search</button>
 							</div>
-							<div class="box-body col-lg-12">
-								<table class="table table-bordered table-striped table-hover">
+							<div class="box-body">
+								<table class="table table-hover">
 									<tr>
 										<th class="col-lg-0"></th>
 										<th>no</th>
 										<th>id</th>
 										<th>입금액</th>
 										<th>입금은행</th>
+										<th>입금주</th>
 										<th>신청일</th>
 										<th>승인일</th>
 										<th>만기일</th>
 										<th>상태</th>
 									</tr>
-			
+									
+									<!--상태 비교를 위해 현재 날짜를 가져옴 -->
+									<%
+									Date now = new Date();
+									%>
+									<c:set var="now" value="<%=now%>"/>
+									
+									<!-- 결제 리스트를 출력 -->
 									<c:forEach items="${list}" var="paymentDto" varStatus="status">
-			
 										<tr>
 											<td>
 												<input type="checkbox" >
@@ -100,26 +126,22 @@
 											<td>${paymentDto.u_id}</td>
 											<td>${paymentDto.p_price}</td>
 											<td>${paymentDto.p_dep_bank}</td>
+											<td>${paymentDto.p_dep_nm}</td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${paymentDto.p_regdt}"/></td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${paymentDto.p_depdt}"/></td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${paymentDto.p_enddt}"/></td>
-											<td>
-												<c:if test="${paymentDto.p_depdt==Null}">입금전</c:if>
-												<c:if test="${paymentDto.p_depdt<paymentDto.p_enddt}">만기</c:if>
-											</td>
-											<td>
-												<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regdate}" /></td>
-											<td>
-												
+											<td id="paymentstate">
+												<c:if test="${paymentDto.p_enddt==Null}">입금전</c:if>
+												<c:if test="${paymentDto.p_enddt!=Null}">
+													<c:if test="${paymentDto.p_enddt>=now}">입금완료</c:if>
+													<c:if test="${paymentDto.p_enddt<now}">만기</c:if>
+												</c:if>
 											</td>
 										</tr>
-			
 									</c:forEach>
-			
 								</table>
 							</div>
 							<!-- /.box-body -->
-			
 			
 							<div class="box-footer">
 			
@@ -128,20 +150,20 @@
 			
 										<c:if test="${pageMaker.prev}">
 											<li><a
-												href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+												href="paymentList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 										</c:if>
-			
+										
 										<c:forEach begin="${pageMaker.startPage }"
 											end="${pageMaker.endPage }" var="idx">
 											<li
 												<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-												<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+												<a href="paymentList${pageMaker.makeSearch(idx)}">${idx}</a>
 											</li>
 										</c:forEach>
 			
 										<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 											<li><a
-												href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+												href="paymentList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 										</c:if>
 			
 									</ul>
@@ -150,7 +172,7 @@
 							</div>
 							<!-- /.box-footer-->
 						</div>
-					</div>
+					
 				</div>
 
 
@@ -172,7 +194,34 @@
 	<script src="../js/plugins/morris/raphael.min.js"></script>
 	<script src="../js/plugins/morris/morris.min.js"></script>
 	<script src="../js/plugins/morris/morris-data.js"></script>
-
+	
 </body>
+
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+
+$(document).ready(function(){
+			
+	$("#searchBtn").on("click",
+		function(event) {
+		alert("paymentList"
+				+ '${pageMaker.makeQuery(1)}'
+				+ "&searchType="
+				+ $("select option:selected").val()
+				+ "&keyword=" + $('#keywordInput').val());
+		self.location = "paymentList"
+			+ '${pageMaker.makeQuery(1)}'
+			+ "&searchType="
+			+ $("select option:selected").val()
+			+ "&keyword=" + $('#keywordInput').val();
+		}
+	);
+		
+		
+			
+			
+});	
+
+</script>
 
 </html>

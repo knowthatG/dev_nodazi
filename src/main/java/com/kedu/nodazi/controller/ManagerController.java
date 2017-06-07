@@ -24,7 +24,7 @@ public class ManagerController {
 	private ManagerService service;
 	
 	
-	@RequestMapping(value="/userList", method = RequestMethod.GET)
+	@RequestMapping(value="/paymentList", method = RequestMethod.GET)
 	public String userListSearch(@ModelAttribute("sc") SearchCriteria sc, Model model) throws Exception{
 		logger.info(sc.toString());
 		
@@ -36,7 +36,7 @@ public class ManagerController {
 
 	    model.addAttribute("pageMaker", pageMaker);
 	    
-		return "payManagement";
+		return "/manager/payManagement";
 	}
 	
 	

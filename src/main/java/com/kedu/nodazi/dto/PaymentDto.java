@@ -15,7 +15,6 @@ import java.util.Date;
 public class PaymentDto {
 	
 	private String u_id;
-
 	private String p_dep_nm;
 	private String p_dep_bank;
 	private Date p_regdt;

@@ -20,7 +20,7 @@ public class ManagerDaoImpl implements ManagerDao {
 
 	private static Logger logger = LoggerFactory.getLogger(ManagerDaoImpl.class);
 	
-	private static String namespace = "com.kedu.nodazi.mapper.RecStockMapper";	
+	private static String namespace = "com.kedu.nodazi.mapper.mangerMapper";
 	
 	@Override
 	public List<PaymentDto> paymentListSearch(SearchCriteria sc) throws Exception{
@@ -29,7 +29,7 @@ public class ManagerDaoImpl implements ManagerDao {
 	
 	@Override
 	public int paymentListSearchCount(SearchCriteria sc) throws Exception {
-		return session.selectOne(namespace + ".listSearchCount", sc);
+		return session.selectOne(namespace + ".paymentListSearchCount", sc);
 	}
 	
 }

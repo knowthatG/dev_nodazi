@@ -67,6 +67,7 @@
 			 , b_regdt
 			 , b_updatedt
 			 , b_viewcnt
+			 , r_cnt
 		  from board
 		 where b_no > 0
 		 order by b_no desc, b_regdt desc
@@ -107,6 +108,18 @@
 		
 		<include refid="search"></include>
 	</select>
+	
+	<update id="updateReplyCnt">
+		update board
+		   set r_cnt = r_cnt + #{amount}
+		 where b_no = #{b_no}
+	</update>
+	
+	<update id="updateViewCnt">
+		update board
+		   set b_viewcnt = b_viewcnt + 1
+		 where b_no = #{b_no}
+	</update>
 	
 	<sql id="search">
 	<if test="searchType != null">

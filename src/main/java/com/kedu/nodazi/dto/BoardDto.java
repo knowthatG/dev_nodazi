@@ -12,6 +12,7 @@ public class BoardDto {
 	private int		b_top;
 	private Date	b_updatedt;
 	private int		b_viewcnt;
+	private int		r_cnt;
 	
 	public int getB_no() {
 		return b_no;
@@ -67,12 +68,18 @@ public class BoardDto {
 	public void setB_viewcnt(int b_viewcnt) {
 		this.b_viewcnt = b_viewcnt;
 	}
+	public int getR_cnt() {
+		return r_cnt;
+	}
+	public void setR_cnt(int r_cnt) {
+		this.r_cnt = r_cnt;
+	}
 	
 	@Override
 	public String toString() {
 		return "BoardDto [b_no=" + b_no + ", b_title=" + b_title + ", b_content=" + b_content + ", u_id=" + u_id
 				+ ", b_regda=" + b_regda + ", b_notice=" + b_notice + ", b_top=" + b_top + ", b_updatedt=" + b_updatedt
-				+ ", b_viewcnt=" + b_viewcnt + "]";
+				+ ", b_viewcnt=" + b_viewcnt + ", r_cnt=" + r_cnt + "]";
 	}
 	
 }

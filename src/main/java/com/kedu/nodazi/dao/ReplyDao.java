@@ -2,6 +2,7 @@ package com.kedu.nodazi.dao;
 
 import java.util.List;
 
+import com.kedu.nodazi.dto.Criteria;
 import com.kedu.nodazi.dto.ReplyDto;
 
 /*****************************************************
@@ -21,4 +22,10 @@ public interface ReplyDao {
 	public void update(ReplyDto rDto) throws Exception;
 	
 	public void delete(int r_no) throws Exception;
+	
+	public List<ReplyDto> listPage(int b_no, Criteria cri) throws Exception;
+	
+	public int count(int b_no) throws Exception;
+	
+	public int getB_no(int r_no) throws Exception;
 }

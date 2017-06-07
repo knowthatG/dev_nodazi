@@ -5,6 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kedu.nodazi.dao.BoardDao;
 import com.kedu.nodazi.dto.BoardDto;
@@ -22,8 +24,10 @@ public class BoardServiceImpl implements BoardService {
 		dao.create(board);
 	}
 
+	@Transactional(isolation=Isolation.READ_COMMITTED)
 	@Override
 	public BoardDto read(int b_no) throws Exception {
+		dao.updateViewCnt(b_no);
 		return dao.read(b_no);
 	}
 

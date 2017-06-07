@@ -84,11 +84,7 @@
 	</select>
 	
 	<select id="listSearch"
-<<<<<<< HEAD
 			resultType="com.kedu.nodazi.dto.BoardDto">
-=======
-			resultType="BoardDto">
->>>>>>> branch 'master' of https://github.com/knowthatG/dev_nodazi.git
 		<![CDATA[
 		select *
 		  from board

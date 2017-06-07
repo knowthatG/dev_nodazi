@@ -7,10 +7,12 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.kedu.nodazi.dto.PaymentDto;
 import com.kedu.nodazi.dto.SearchCriteria;
 
+@Repository
 public class ManagerDaoImpl implements ManagerDao {
 	 
 	@Inject

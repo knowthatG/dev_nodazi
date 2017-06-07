@@ -84,7 +84,7 @@
 	</select>
 	
 	<select id="listSearch"
-			reusltType="BoardDto">
+			resultType="BoardDto">
 		<![CDATA[
 		select *
 		  from board

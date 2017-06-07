@@ -15,7 +15,6 @@ public class PricesDto {
 	private	Integer	price_adj_close;
 	private Integer volume;
 	
-	
 	public Integer getId() {
 		return id;
 	}

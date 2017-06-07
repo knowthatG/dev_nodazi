@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybais.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kedu.nodazi.mapper.BoardMapper">
+
+	<insert id="create">
+		insert into board(b_title
+						, b_content
+                    	, u_id)
+			   		values(#{b_title}
+						 , #{b_content}
+                    	 , #{u_id})
+	</insert>
+	
+	<select id="read"
+			resultType="BoardDto">
+		select b_no
+			 , b_title
+			 , b_content
+			 , b_regdt
+			 , b_viewcnt
+			 , u_id
+			 , b_replycnt
+  		  from board
+ 		 where b_no = #{b_no}
+	</select>
+	
+	<update id="update">
+		update board
+   		   set b_title = #{b_title}
+			 , b_content = #{b_content}
+			 , u_id = #{u_id}
+			 , b_updatedt = now()
+		 where b_no = #{b_no}
+	</update>
+	
+	<delete id="delete">
+		delete from board
+		 where b_no = #{b_no}
+	</delete>
+	
+	<select id="listAll"
+			resultType="BoardDto">
+		<![CDATA[
+		select b_no
+			 , b_title
+			 , b_content
+			 , u_id
+			 , b_regdt
+			 , b_viewcnt
+		  from board
+		 where b_no > 0
+		 order by b_no desc, b_regdt desc
+		 limit #{page}, 10
+		 ]]>
+	</select>
+	
+	<select id="listCriteria"
+			resultType="BoardDto">
+		<![CDATA[
+		select b_no
+			 , b_title
+			 , b_content
+			 , u_id
+			 , b_regdt
+			 , b_updatedt
+			 , b_viewcnt
+		  from board
+		 where b_no > 0
+		 order by b_no desc, b_regdt desc
+		 limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	
+	<select id="countPaging"
+			resultType="int">
+		<![CDATA[
+		select count(b_no)
+		  from board
+		 where b_no > 0
+		]]>
+	</select>
+	
+	<select id="listSearch"
+			reusltType="BoardDto">
+		<![CDATA[
+		select *
+		  from board
+		 where b_no > 0
+		]]>
+		
+		<include refid="search"></include>
+		
+		 order by b_no desc
+		 limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="listSearchCount"
+			resultType="int">
+		<![CDATA[
+		select count(b_no)
+		  from board
+		 where b_no > 0
+		]]>
+		
+		<include refid="search"></include>
+	</select>
+	
+	<sql id="search">
+	<if test="searchType != null">
+		<if test="searchType == 't'.toString()">
+			and b_title like CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and content like CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="searchType == 'w'.toString()">
+			and writer like CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and (title like CONCAT('%', #{keyword}, '%')
+			OR content like CONCAT('%', #{keyword}, '%'))
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			and (content like CONCAT('%', #{keyword}, '%')
+			OR writer like CONCAT('%', #{keyword}, '%'))
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			and (title like CONCAT('%', #{keyword}, '%')
+			OR content like CONCAT('%', #{keyword}, '%')
+			OR writer like CONCAT('%', #{keyword}, '%'))
+		</if>
+	</if>
+	</sql>
+	
+</mapper>
